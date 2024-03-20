@@ -6,10 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -33,15 +34,37 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    public function roles(){
+        return $this->belongsToMany(Role::class, 'user_role');
     }
+
+    public function hasRole($roles){
+        return null !== $this->roles()->where('name', $roles)->first();
+    }
+
+    public function hasAnyRole($roles){
+        return null !== $this->roles()->whereIn('name', $roles)->first();
+    }
+
+    // $user->authorizeRoles('admin');
+    // $user->authorizeRoles(['admin', 'editor']);
+
+    public function authorizeRoles($roles) {
+        if(is_array($roles)){
+            return $this->hasAnyRole($roles) || abort(403, "You are not authorised!");
+        }
+
+        return $this->hasRole($roles) || abort(403, "You are not authorised!");
+
+    }
+
 }
