@@ -3,16 +3,15 @@
 namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Group;
+use App\Models\CleanUp;
 
-class GroupSeeder extends Seeder
+class CleanUpSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Group::factory()->times(15)->create();
-
+        CleanUp::factory()->times(10)->create();
     }
 }
