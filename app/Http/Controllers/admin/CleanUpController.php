@@ -13,7 +13,8 @@ class CleanUpController extends Controller
      */
     public function index()
     {
-        //
+        $cleanups = CleanUp::paginate(10);
+        return view('admin.cleanups.index')->with('cleanups', $cleanups);
     }
 
     /**
