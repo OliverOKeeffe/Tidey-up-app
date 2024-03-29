@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCleanUpRequest;
-use App\Http\Requests\UpdateCleanUpRequest;
-use App\Models\CleanUp;
+use App\Http\Requests\StoreRoleRequest;
+use App\Http\Requests\UpdateRoleRequest;
+use App\Models\Role;
 
-class CleanUpController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $cleanups = CleanUp::paginate(10);
-        return view('cleanups.index')->with('cleanups', $cleanups);
+        //
     }
 
     /**
@@ -28,7 +27,7 @@ class CleanUpController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCleanUpRequest $request)
+    public function store(StoreRoleRequest $request)
     {
         //
     }
@@ -36,7 +35,7 @@ class CleanUpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CleanUp $cleanUp)
+    public function show(Role $role)
     {
         //
     }
@@ -44,7 +43,7 @@ class CleanUpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CleanUp $cleanUp)
+    public function edit(Role $role)
     {
         //
     }
@@ -52,7 +51,7 @@ class CleanUpController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCleanUpRequest $request, CleanUp $cleanUp)
+    public function update(UpdateRoleRequest $request, Role $role)
     {
         //
     }
@@ -60,7 +59,7 @@ class CleanUpController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CleanUp $cleanUp)
+    public function destroy(Role $role)
     {
         //
     }

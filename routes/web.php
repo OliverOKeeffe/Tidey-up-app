@@ -31,16 +31,14 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    // Route::resource('publishers', PublisherController::class);
-    // Route::resource('phones', PhoneController::class);
-    // Route::resource('authors', AuthorController::class);
+   
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
-Route::resource('/phones', UserCleanUpController::class)
+Route::resource('/cleanups', UserCleanUpController::class)
         ->middleware(['auth', 'role:user,admin'])
         ->names('user.cleanups')
         ->only(['index', 'show']);

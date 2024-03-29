@@ -19,6 +19,5 @@ class CleanUp extends Model
         'time',
         'date',
         'description',
-        'image_id',
     ];
 }
