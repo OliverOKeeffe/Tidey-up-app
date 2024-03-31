@@ -42,8 +42,9 @@ Route::resource('/cleanups', UserCleanUpController::class)
         ->middleware(['auth', 'role:user,admin'])
         ->names('user.cleanups')
         ->only(['index', 'show']);
-Route::resource('/admin/cleanups', AdminCleanUpController::class)->middleware(['auth', 'role:admin'])->names('admin.cleanups');
-
+Route::resource('/admin/cleanups', AdminCleanUpController::class)
+        ->middleware(['auth'])
+        ->names('admin.cleanups');
 
 Route::resource('/user/cleanups', UserCleanUpController::class)->middleware(['auth', 'role:user'])->names('user.cleanups');
 

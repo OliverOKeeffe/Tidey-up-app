@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCleanUpRequest;
 use App\Http\Requests\UpdateCleanUpRequest;
 use App\Models\CleanUp;
+use Auth;
 
 class CleanUpController extends Controller
 {
@@ -14,7 +16,7 @@ class CleanUpController extends Controller
     public function index()
     {
         $cleanups = CleanUp::paginate(10);
-        return view('cleanups.index')->with('cleanups', $cleanups);
+        return view('admin.cleanups.index')->with('cleanups', $cleanups);
     }
 
     /**
