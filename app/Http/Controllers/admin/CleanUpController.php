@@ -66,8 +66,11 @@ class CleanUpController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CleanUp $cleanUp)
+    public function destroy(string $id)
     {
-        //
+        $cleanup = CleanUp::findOrFail($id);
+        $cleanup->delete();
+    
+        return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up deleted successfully');
     }
 }

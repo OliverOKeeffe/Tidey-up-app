@@ -21,7 +21,7 @@ class CleanUpFactory extends Factory
             'location' => $this->faker->city(),
             'time' => $this->faker->time(),
             'date' => $this->faker->date(),
-            'description' => $this->faker->sentence(),
+            'description' => $this->faker->realText(150),
         ];
     }
 }
