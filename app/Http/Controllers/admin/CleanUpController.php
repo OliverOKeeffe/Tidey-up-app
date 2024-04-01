@@ -38,9 +38,13 @@ class CleanUpController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CleanUp $cleanUp)
+    public function show(string $id)
     {
-        //
+        $cleanUp = CleanUp::findOrFail($id);
+
+        return view('admin.cleanups.show', [
+            'cleanup' => $cleanUp
+        ]);
     }
 
     /**
