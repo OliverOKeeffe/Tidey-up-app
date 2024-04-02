@@ -24,7 +24,7 @@ class CleanUpController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.cleanups.create');
     }
 
     /**
@@ -32,7 +32,17 @@ class CleanUpController extends Controller
      */
     public function store(StoreCleanUpRequest $request)
     {
-        //
+
+        $cleanUp = new CleanUp();
+        $cleanUp->location = $request->location;
+        $cleanUp->time = $request->time;
+        $cleanUp->date = $request->date;
+        $cleanUp->description = $request->description;
+        $cleanUp->user_id = Auth::user()->id;
+        $cleanUp->save();
+
+        return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up created successfully');
+
     }
 
     /**
