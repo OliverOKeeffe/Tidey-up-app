@@ -32,7 +32,24 @@ class CleanUpController extends Controller
      */
     public function store(StoreCleanUpRequest $request)
     {
-        //
+        $rules =[
+            'location'=> 'required|string|min:2|max:150',
+            'time'=> 'required|time',
+            'date'=> 'required|date',
+            'description'=> 'required|string|min:2|max:150',
+
+        ];
+        // display the message if the brand is not a unique name
+
+        // this requests the rules from above for the validation process
+        $request->validate($rules, $messages);
+
+        $cleanUp = new CleanUp();
+        $cleanUp->fill($request->all());
+        $cleanUp->user_id = Auth::id();
+        $cleanUp->save();
+
+        return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up created successfully');
     }
 
     /**
@@ -63,7 +80,20 @@ class CleanUpController extends Controller
      */
     public function update(UpdateCleanUpRequest $request, CleanUp $cleanUp)
     {
-        //
+        $rules =[
+            'location'=> 'required|string|min:2|max:150',
+            'time'=> 'required|time',
+            'date'=> 'required|date',
+            'description'=> 'required|string|min:2|max:150',
+
+        ];
+
+        $request->validate($rules, $messages);
+
+        $cleanUp->fill($request->all());
+        $cleanUp->save();
+
+        return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up updated successfully');
     }
 
     /**

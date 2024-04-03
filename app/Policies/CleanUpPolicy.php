@@ -29,7 +29,9 @@ class CleanUpPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role === 'admin'
+            ? Response::allow()
+            : Response::deny('You do not have permission to create a clean-up event');
     }
 
     /**
@@ -37,7 +39,8 @@ class CleanUpPolicy
      */
     public function update(User $user, CleanUp $cleanUp): bool
     {
-        //
+        // Allow only the user who created the CleanUp or an admin to update it
+        return $user->id === $cleanUp->user_id || $user->role === 'admin';
     }
 
     /**
