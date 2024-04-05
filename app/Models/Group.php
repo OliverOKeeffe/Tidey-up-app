@@ -9,7 +9,7 @@ class Group extends Model
 {
     use HasFactory;
 
-     /**
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
@@ -18,9 +18,10 @@ class Group extends Model
         'name',
         'location',
         'no_of_users',
-        'no_of_clean-ups',
+        'no_of_cleanups',
         'user_id',
         'clan-up_id',
         'image_id',
     ];
+
 }

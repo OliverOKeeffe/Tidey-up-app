@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
+use Auth;
+
 
 class GroupController extends Controller
 {
@@ -13,7 +16,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+        $groups = Group::paginate(10);
+        return view('admin.groups.index')->with('groups', $groups);
     }
 
     /**

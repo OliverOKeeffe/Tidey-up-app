@@ -16,7 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.cleanups.index')" :active="request()->routeIs('admin.cleanups')">
-                        {{ __('CleanUps') }}
+                        {{ __('Clean Ups') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.groups.index')" :active="request()->routeIs('admin.groups')">
+                        {{ __('Groups') }}
                     </x-nav-link>
                     
                 </div>

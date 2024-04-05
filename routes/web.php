@@ -10,6 +10,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\CleanUpController as AdminCleanUpController;
 use App\Http\Controllers\User\CleanUpController as UserCleanUpController;
 
+use App\Http\Controllers\Admin\GroupController as AdminGroupController;
+use App\Http\Controllers\User\GroupController as UserGroupController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +49,13 @@ Route::resource('/admin/cleanups', AdminCleanUpController::class)
         ->middleware(['auth'])
         ->names('admin.cleanups');
 
-Route::resource('/user/cleanups', UserCleanUpController::class)->middleware(['auth', 'role:user'])->names('user.cleanups');
+Route::resource('/user/cleanups', UserCleanUpController::class)->middleware(['auth', 'role:user'])->names('user.groups');
+
+Route::resource('/admin/groups', AdminGroupController::class)
+        ->middleware(['auth'])
+        ->names('admin.groups');
+
+Route::resource('/user/groups', UserGroupController::class)->middleware(['auth', 'role:user'])->names('user.groups');
 
 
 require __DIR__.'/auth.php';
