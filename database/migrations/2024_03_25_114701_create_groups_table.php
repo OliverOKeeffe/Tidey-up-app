@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('location');
             $table->integer('no_of_users');
-            $table->integer('no_of_clean-ups');
+            $table->integer('no_of_cleanups');
 
             // $table->foreignId('user_id');
 
