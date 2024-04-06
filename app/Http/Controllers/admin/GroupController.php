@@ -39,9 +39,13 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Group $group)
+    public function show(string $id)
     {
-        //
+        $group = Group::findOrFail($id);
+
+        return view('admin.groups.show', [
+            'group' => $group
+        ]);
     }
 
     /**
@@ -63,8 +67,11 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Group $group)
+    public function destroy(string $id)
     {
-        //
+        $group = Group::findOrFail($id);
+        $group->delete();
+    
+        return redirect()->route('admin.groups.index')->with('status', 'Group deleted successfully');
     }
 }
