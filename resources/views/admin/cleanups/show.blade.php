@@ -17,7 +17,8 @@
                         <p><b>Location:</b> {{ $cleanup->location }}</p>
                         <p><b>Time:</b> {{ $cleanup->time }}</p>                      
                         <p><b>Date:</b> {{ $cleanup->date }}</p>                      
-                        <p><b>Decscription:</b> {{ $cleanup->description }}</p>                      
+                        <p><b>Decscription:</b> {{ $cleanup->description }}</p>
+                        <p><b>Group Id:</b> {{ $cleanup->group_id }}</p>                     
 <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"><a href="{{ route('admin.cleanups.edit', $cleanup->id) }}">Edit</a></button>
 
     <form method="POST" action="{{ route('admin.cleanups.destroy' , $cleanup->id) }}">
