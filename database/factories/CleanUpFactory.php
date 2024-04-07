@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\CleanUp;
+use App\Models\Group;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,6 +23,8 @@ class CleanUpFactory extends Factory
             'time' => $this->faker->time(),
             'date' => $this->faker->date(),
             'description' => $this->faker->realText(150),
+            'group_id' => Group::inRandomOrder()->take(1)->pluck('id')[0]
+
         ];
     }
 }

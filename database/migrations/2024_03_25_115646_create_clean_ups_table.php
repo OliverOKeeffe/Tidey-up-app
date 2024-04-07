@@ -20,6 +20,9 @@ return new class extends Migration
             
             // $table->foreignId('image_id');
             // $table->foreign('image_id')->references('id')->on('images');
+
+            $table->foreignId('group_id');
+            $table->foreign('group_id')->references('id')->on('groups');
             
             $table->timestamps();
         });
