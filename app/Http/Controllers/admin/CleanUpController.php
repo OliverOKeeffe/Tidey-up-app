@@ -16,7 +16,7 @@ class CleanUpController extends Controller
      */
     public function index()
     {
-        $cleanups = CleanUp::paginate(10);
+        $cleanups = CleanUp::all();
         return view('admin.cleanups.index')->with('cleanups', $cleanups);
     }
 
