@@ -46,6 +46,14 @@
         <span>{{ $errors->first('description') }}</span>
         @endif
     </div>
+    <div class="form-group">
+         <label for="group">Group</label>
+          <select name="group_id">
+       @foreach($groups as $group)
+         <option {{ old('group_id') == $group->id ? "selected" : "" }} value="{{$group->id}}">{{$group->name}}</option>
+        @endforeach
+        </select>
+    </div>
 
 
 

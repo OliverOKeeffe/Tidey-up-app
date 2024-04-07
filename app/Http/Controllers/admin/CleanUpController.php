@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCleanUpRequest;
 use App\Http\Requests\UpdateCleanUpRequest;
 use App\Models\CleanUp;
+use App\Models\Group;
 use Auth;
 
 class CleanUpController extends Controller
@@ -24,7 +25,10 @@ class CleanUpController extends Controller
      */
     public function create()
     {
-        return view('admin.cleanups.create');
+        $groups = Group::all();
+
+        return view('admin.cleanups.create')->with('groups', $groups);
+
     }
 
     /**
@@ -37,6 +41,7 @@ class CleanUpController extends Controller
             'time'=> 'required|time',
             'date'=> 'required|date',
             'description'=> 'required|string|min:2|max:150',
+            'brand_id' => 'required',
 
         ];
         // display the message if the brand is not a unique name
@@ -70,9 +75,8 @@ class CleanUpController extends Controller
     public function edit(string $id)
     {
         $cleanup = CleanUp::findOrFail($id);
-        return view('admin.cleanups.edit', [
-            'cleanup' => $cleanup
-        ]);
+        $groups = Group::all();
+        return view('admin.cleanups.edit', ['cleanup' => $cleanup])->with('groups', $groups);
     }
 
     /**
