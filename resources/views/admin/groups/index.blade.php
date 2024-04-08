@@ -46,7 +46,7 @@
                 {{ $group->no_of_users }}
             </td>
             <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
-                {{ $group->no_of_cleanups }}
+            {{ $group->cleanups->count() }}          
             </td>
             
             <td class="px-6 py-4">

@@ -24,4 +24,8 @@ class Group extends Model
         'image_id',
     ];
 
+    public function cleanups()
+{
+    return $this->hasMany(CleanUp::class);
+}
 }

@@ -17,7 +17,7 @@
                         <p><b>Name:</b> {{ $group->name }}</p>
                         <p><b>Location:</b> {{ $group->location }}</p>                      
                         <p><b>Number of Users:</b> {{ $group->no_of_users }}</p>                      
-                        <p><b>Number of Clean Ups:</b> {{ $group->no_of_cleanups }}</p>                      
+                        <p><b>Number of Clean Ups:</b> {{ $group->cleanups->count() }}  </p>                      
 <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"><a href="{{ route('admin.groups.edit', $group->id) }}">Edit</a></button>
 
     <form method="POST" action="{{ route('admin.groups.destroy' , $group->id) }}">

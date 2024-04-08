@@ -16,8 +16,11 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::all();
-        return view('admin.groups.index')->with('groups', $groups);
+        // $groups = Group::all();
+        // return view('admin.groups.index')->with('groups', $groups);
+        $groups = Group::with('cleanups')->get();
+
+        return view('admin.groups.index', ['groups' => $groups]);
     }
 
     /**
