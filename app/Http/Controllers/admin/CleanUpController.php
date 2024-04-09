@@ -84,6 +84,7 @@ class CleanUpController extends Controller
      */
     public function update(UpdateCleanUpRequest $request, string $id)
 {
+    $user = Auth::user();
     $user->authorizeRoles('admin');
 
     $rules =[

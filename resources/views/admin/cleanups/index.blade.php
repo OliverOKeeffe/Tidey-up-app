@@ -30,7 +30,9 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Group Id
-                </th>                
+                </th>  
+                <th scope="col" class="px-6 py-3">
+                    Group Name              
                 <th scope="col" class="px-6 py-3">
                     Action
                 </th>
@@ -53,6 +55,10 @@
             </td>
             <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
                 {{ $cleanup->group_id }}
+            </td>
+            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
+                {{ $cleanup->group->name }}
+            </td>
             <td class="px-6 py-4">
             <a href="{{ route('admin.cleanups.show', $cleanup->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
             </td>

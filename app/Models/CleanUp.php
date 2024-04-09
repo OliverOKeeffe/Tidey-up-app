@@ -19,5 +19,12 @@ class CleanUp extends Model
         'time',
         'date',
         'description',
+        'group_id',
+        'image_id'
     ];
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }
