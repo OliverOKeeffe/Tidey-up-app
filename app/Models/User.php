@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Role;
+
 
 class User extends Authenticatable
 {
@@ -56,7 +58,7 @@ class User extends Authenticatable
     }
 
     // $user->authorizeRoles('admin');
-    // $user->authorizeRoles(['admin', 'editor']);
+    // // $user->authorizeRoles(['admin', 'editor']);
 
     public function authorizeRoles($roles) {
         if(is_array($roles)){

@@ -4,6 +4,8 @@ namespace App\Policies;
 
 use App\Models\CleanUp;
 use App\Models\User;
+use App\Models\Role;
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
 class CleanUpPolicy
@@ -29,9 +31,8 @@ class CleanUpPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === 'admin'
-            ? Response::allow()
-            : Response::deny('You do not have permission to create a clean-up event');
+        return $user->role === 'admin';
+           
     }
 
     /**

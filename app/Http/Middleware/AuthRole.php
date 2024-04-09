@@ -18,6 +18,7 @@ class AuthRole
         if (!$request->user() || !$request->user()->hasAnyRole($roles)) {
             return redirect()->route('dashboard');
         }
+        
 
         return $next($request);
     }

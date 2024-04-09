@@ -82,23 +82,22 @@ class CleanUpController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCleanUpRequest $request, CleanUp $cleanUp)
-    {
-        $rules =[
-            'location'=> 'required|string|min:2|max:150',
-            'time'=> 'required|time',
-            'date'=> 'required|date',
-            'description'=> 'required|string|min:2|max:150',
+    public function update(UpdateCleanUpRequest $request, CleanUp $cleanup)
+{
+    $user->authorizeRoles('admin');
 
-        ];
+    $rules =[
+        'location'=> 'required|string|min:2|max:150',
+        'time'=> 'required|time',
+        'date'=> 'required|date',
+        'description'=> 'required|string|min:2|max:150',
+    ];
 
-        $request->validate($rules, $messages);
+    $request->validate($rules, $messages);
 
-        $cleanUp->fill($request->all());
-        $cleanUp->save();
-
-        return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up updated successfully');
-    }
+    $cleanup->fill($request->all());
+    $cleanup->save();
+}
 
     /**
      * Remove the specified resource from storage.
