@@ -51,7 +51,6 @@ class CleanUpController extends Controller
 
         $cleanUp = new CleanUp();
         $cleanUp->fill($request->all());
-        $cleanUp->user_id = Auth::id();
         $cleanUp->save();
 
         return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up created successfully');
