@@ -57,8 +57,6 @@ Route::resource('/admin/groups', AdminGroupController::class)
     ->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':admin'])
     ->names('admin.groups');
 
-
-
 Route::resource('/user/groups', UserGroupController::class)->middleware(['auth', 'role:user'])->names('user.groups');
 
 

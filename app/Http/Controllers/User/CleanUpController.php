@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCleanUpRequest;
 use App\Http\Requests\UpdateCleanUpRequest;
-use Illuminate\Http\Request;
 use App\Models\CleanUp;
 use App\Models\Group;
 use Auth;
@@ -48,6 +47,7 @@ class CleanUpController extends Controller
         // display the message if the brand is not a unique name
 
         // this requests the rules from above for the validation process
+        $request->validate($rules, $messages);
 
         $cleanUp = new CleanUp();
         $cleanUp->fill($request->all());
@@ -88,7 +88,7 @@ class CleanUpController extends Controller
 
     $rules =[
         'location'=> 'required|string|min:2|max:150',
-        'time'=> 'required|date_format:H:i',
+        'time'=> 'required|time',
         'date'=> 'required|date',
         'description'=> 'required|string|min:2|max:150',
     ];
@@ -112,5 +112,4 @@ class CleanUpController extends Controller
     
         return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up deleted successfully');
     }
-    
 }

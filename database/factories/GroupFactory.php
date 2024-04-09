@@ -18,6 +18,7 @@ class GroupFactory extends Factory
             'name' => $this->faker->country(),
             'location' => $this->faker->city(),
             'no_of_users' => $this->faker->numberBetween($min = 10, $max = 50),
+            'no_of_cleanups' => $this->faker->numberBetween($min = 1, $max = 10),
         ];
     }
 }

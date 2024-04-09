@@ -11,7 +11,7 @@ class UpdateCleanUpRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateCleanUpRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'location'=> 'required|string|min:2|max:150',
+            'time'=> 'required|date_format:H:i',
+            'date'=> 'required|date',
+            'description'=> 'required|string|min:2|max:150',
+            'group_id' => 'required|exists:groups,id',
         ];
     }
 }

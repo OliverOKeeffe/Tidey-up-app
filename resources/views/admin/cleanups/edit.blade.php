@@ -27,7 +27,7 @@
     </div>
     <div>
         <label for="">time</label>
-        <input type="time" name="time" id="time" value="{{ old('time')? : $cleanup->time }}"/>
+        <input type="time" name="time" id="time" value="{{ old('time') ? old('time') : \Carbon\Carbon::parse($cleanup->time)->format('H:i') }}"/>
         @if($errors->has('time'))
         <span>{{ $errors->first('time') }}</span>
         @endif
