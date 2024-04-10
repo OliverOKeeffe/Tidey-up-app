@@ -7,7 +7,7 @@ use App\Http\Requests\StoreCleanUpRequest;
 use App\Http\Requests\UpdateCleanUpRequest;
 use App\Models\CleanUp;
 use App\Models\Group;
-
+use Illuminate\Support\Facades\Auth;
 
 class CleanUpController extends Controller
 {
@@ -82,17 +82,15 @@ class CleanUpController extends Controller
      */
     public function update(UpdateCleanUpRequest $request, string $id)
 {
+    $user = Auth::user();
+    $user->authorizeRoles('admin');
 
     $rules =[
         'location'=> 'required|string|min:2|max:150',
         'time'=> 'required|date_format:H:i',
         'date'=> 'required|date',
         'description'=> 'required|string|min:2|max:150',
-        'group_id' => 'required',
     ];
-
-    
-
 
     $cleanup = CleanUp::findOrFail($id);
     $cleanup->fill($request->all());
