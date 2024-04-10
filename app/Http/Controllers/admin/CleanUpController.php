@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCleanUpRequest;
 use App\Http\Requests\UpdateCleanUpRequest;
-use Illuminate\Support\Facades\Auth;
 use App\Models\CleanUp;
 use App\Models\Group;
 
@@ -89,7 +88,11 @@ class CleanUpController extends Controller
         'time'=> 'required|date_format:H:i',
         'date'=> 'required|date',
         'description'=> 'required|string|min:2|max:150',
+        'group_id' => 'required',
     ];
+
+    
+
 
     $cleanup = CleanUp::findOrFail($id);
     $cleanup->fill($request->all());
