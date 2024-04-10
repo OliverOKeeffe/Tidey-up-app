@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCleanUpRequest;
 use App\Http\Requests\UpdateCleanUpRequest;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\CleanUp;
 use App\Models\Group;
-use Auth;
+
 
 class CleanUpController extends Controller
 {
@@ -84,8 +83,6 @@ class CleanUpController extends Controller
      */
     public function update(UpdateCleanUpRequest $request, string $id)
 {
-    $user = Auth::user();
-    $user->authorizeRoles('admin');
 
     $rules =[
         'location'=> 'required|string|min:2|max:150',
@@ -113,15 +110,5 @@ class CleanUpController extends Controller
     
         return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up deleted successfully');
     }
-
-    public function join(CleanUp $cleanup)
-{
-    // Add the authenticated user to the cleanup
-    $cleanup->users()->attach(Auth::id());
-
-    // Redirect the user to a different page with a success message
-    return redirect()->route('admin.cleanups.index')->with('status', 'Successfully joined the cleanup');
-}
-
     
 }

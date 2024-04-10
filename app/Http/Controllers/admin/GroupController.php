@@ -46,9 +46,8 @@ class GroupController extends Controller
     {
         $group = Group::findOrFail($id);
 
-        return view('admin.groups.show', [
-            'group' => $group
-        ]);
+        $cleanups = $group->cleanups;
+        return view('admin.groups.show', ['group' => $group, 'cleanups' => $cleanups]);
     }
 
     /**
