@@ -69,4 +69,9 @@ class User extends Authenticatable
 
     }
 
+    public function cleanups()
+{
+    return $this->belongsToMany(CleanUp::class);
+}
+
 }

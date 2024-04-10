@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCleanUpRequest;
 use App\Http\Requests\UpdateCleanUpRequest;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Models\CleanUp;
 use App\Models\Group;
@@ -112,5 +113,15 @@ class CleanUpController extends Controller
     
         return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up deleted successfully');
     }
+
+    public function join(CleanUp $cleanup)
+{
+    // Add the authenticated user to the cleanup
+    $cleanup->users()->attach(Auth::id());
+
+    // Redirect the user to a different page with a success message
+    return redirect()->route('admin.cleanups.index')->with('status', 'Successfully joined the cleanup');
+}
+
     
 }

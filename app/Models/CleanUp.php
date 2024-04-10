@@ -27,4 +27,9 @@ class CleanUp extends Model
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function users()
+{
+    return $this->belongsToMany(User::class);
+}
 }

@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/cleanups/{cleanup}/join', [AdminCleanUpController::class, 'join'])->name('admin.cleanups.join');
+    
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
@@ -58,6 +61,5 @@ Route::resource('/admin/groups', AdminGroupController::class)
     ->names('admin.groups');
 
 Route::resource('/user/groups', UserGroupController::class)->middleware(['auth', 'role:user'])->names('user.groups');
-
 
 require __DIR__.'/auth.php';
