@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Models\Group;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 
 class GroupController extends Controller

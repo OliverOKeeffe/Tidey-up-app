@@ -111,5 +111,31 @@ class CleanUpController extends Controller
     
         return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up deleted successfully');
     }
+
+    public function join(CleanUp $cleanup)
+{
+    // Get the currently authenticated user
+    $user = Auth::user();
+
+    // Attach the cleanup to the user
+    $user->cleanUps()->attach($cleanup->id);
+
+    // Redirect to the cleanup's show page
+    return redirect()->route('admin.cleanups.show', ['cleanup' => $cleanup->id]);
+}
+
+
+public function leave(CleanUp $cleanup)
+{
+    // Get the currently authenticated user
+    $user = Auth::user();
+
+    // Detach the cleanup from the user
+    $user->cleanUps()->detach($cleanup->id);
+
+    // Redirect to the cleanup's show page
+    return redirect()->route('admin.cleanups.show', ['cleanup' => $cleanup->id]);
+}
+
     
 }

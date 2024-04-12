@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/cleanups/{cleanup}/join', [AdminCleanUpController::class, 'join'])->name('admin.cleanups.join');
+    Route::post('/cleanups/{cleanup}/leave', [AdminCleanUpController::class, 'leave'])->name('admin.cleanups.leave');
+
     
 });
 
