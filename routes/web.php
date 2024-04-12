@@ -47,21 +47,29 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
-Route::resource('/cleanups', UserCleanUpController::class)
-        ->middleware(['auth', 'role:user,admin'])
-        ->names('user.cleanups')
-        ->only(['index', 'show']);
+// Route::resource('/cleanups', UserCleanUpController::class)
+//         ->middleware(['auth', 'role:user,admin'])
+//         ->names('user.cleanups')
+//         ->only(['index', 'show']);
 
 Route::resource('/admin/cleanups', AdminCleanUpController::class)
         ->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':admin'])
         ->names('admin.cleanups');
+    
+Route::resource('/user/cleanups', UserCleanUpController::class)
+        ->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':user'])
+        ->names('user.cleanups');
 
-Route::resource('/user/cleanups', UserCleanUpController::class)->middleware(['auth', 'role:user'])->names('user.groups');
+
+// Route::resource('/user/cleanups', UserCleanUpController::class)->middleware(['auth', 'role:user'])->names('user.cleanups');
 
 Route::resource('/admin/groups', AdminGroupController::class)
     ->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':admin'])
     ->names('admin.groups');
 
-Route::resource('/user/groups', UserGroupController::class)->middleware(['auth', 'role:user'])->names('user.groups');
+Route::resource('/user/groups', UserGroupController::class)
+    ->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':user'])
+    ->names('user.groups');
+
 
 require __DIR__.'/auth.php';

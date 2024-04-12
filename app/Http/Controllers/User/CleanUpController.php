@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCleanUpRequest;
-use App\Http\Requests\UpdateCleanUpRequest;
+use Illuminate\Http\Request;
 use App\Models\CleanUp;
-use App\Models\Group;
-use Auth;
 
 class CleanUpController extends Controller
 {
@@ -17,44 +14,7 @@ class CleanUpController extends Controller
     public function index()
     {
         $cleanups = CleanUp::all();
-        return view('admin.cleanups.index')->with('cleanups', $cleanups);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $groups = Group::all();
-
-        return view('admin.cleanups.create')->with('groups', $groups);
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCleanUpRequest $request)
-    {
-        $rules =[
-            'location'=> 'required|string|min:2|max:150',
-            'time'=> 'required|time',
-            'date'=> 'required|date',
-            'description'=> 'required|string|min:2|max:150',
-            'group_id' => 'required',
-
-        ];
-        // display the message if the brand is not a unique name
-
-        // this requests the rules from above for the validation process
-        $request->validate($rules, $messages);
-
-        $cleanUp = new CleanUp();
-        $cleanUp->fill($request->all());
-        $cleanUp->user_id = Auth::id();
-        $cleanUp->save();
-
-        return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up created successfully');
+        return view('user.cleanups.index')->with('cleanups', $cleanups);
     }
 
     /**
@@ -64,52 +24,33 @@ class CleanUpController extends Controller
     {
         $cleanUp = CleanUp::findOrFail($id);
 
-        return view('admin.cleanups.show', [
+        return view('user.cleanups.show', [
             'cleanup' => $cleanUp
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function join(CleanUp $cleanup)
     {
-        $cleanup = CleanUp::findOrFail($id);
-        $groups = Group::all();
-        return view('admin.cleanups.edit', ['cleanup' => $cleanup])->with('groups', $groups);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCleanUpRequest $request, string $id)
-{
-    $user->authorizeRoles('admin');
-
-    $rules =[
-        'location'=> 'required|string|min:2|max:150',
-        'time'=> 'required|time',
-        'date'=> 'required|date',
-        'description'=> 'required|string|min:2|max:150',
-    ];
-
-    $cleanup = CleanUp::findOrFail($id);
-    $cleanup->fill($request->all());
-    $cleanup->save();
-
-    return redirect()       
-        ->route('admin.cleanups.index')
-        ->with('status', ' Updated a Clean up successfully');
-}
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $cleanup = CleanUp::findOrFail($id);
-        $cleanup->delete();
+        // Get the currently authenticated user
+        $user = Auth::user();
     
-        return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up deleted successfully');
+        // Attach the cleanup to the user
+        $user->cleanUps()->attach($cleanup->id);
+    
+        // Redirect to the cleanup's show page
+        return redirect()->route('admin.cleanups.show', ['cleanup' => $cleanup->id]);
+    }
+    
+    
+    public function leave(CleanUp $cleanup)
+    {
+        // Get the currently authenticated user
+        $user = Auth::user();
+    
+        // Detach the cleanup from the user
+        $user->cleanUps()->detach($cleanup->id);
+    
+        // Redirect to the cleanup's show page
+        return redirect()->route('admin.cleanups.show', ['cleanup' => $cleanup->id]);
     }
 }
