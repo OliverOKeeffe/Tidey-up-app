@@ -13,17 +13,25 @@
                <!-- Navigation Links -->
                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Home') }}
                     </x-nav-link>
                 </div>
                 <!-- added the links to the three tables that i created to the nav bar -->
-                
-                
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('user.cleanups.index')" :active="request()->routeIs('user.cleanups')">
-                        {{ __('Cleanups') }}
+                    <x-nav-link :href="route('user.groups.index')" :active="request()->routeIs('user.groups')">
+                        {{ __('Groups') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('user.cleanups.index')" :active="request()->routeIs('user.cleanups')">
+                        {{ __('Clean-Ups') }}
+                    </x-nav-link>
+                </div>
+                
+
+                
 
             </div>
 
