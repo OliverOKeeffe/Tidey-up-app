@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
+use Illuminate\Http\Request;
 use App\Models\Group;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,19 +83,21 @@ class GroupController extends Controller
 }
 public function join(Group $group)
 {
-    if ($group->admins()->where('admin_id', auth()->id())->exists()) {
-        // User is already a member of the group
-        return redirect()->route('admin.groups.show', $group)->with('error', 'You are already a member of this group');
-    }
+ // Get the currently authenticated user
+ $user = Auth::user();
 
-    $group->admins()->attach(auth()->user());
+ // Attach the cleanup to the user
+ $user->groups()->attach($group->id);
 
-    return redirect()->route('admin.groups.show', $group)->with('success', 'You have successfully joined the group');
+ // Redirect to the cleanup's show page
+ return redirect()->route('admin.groups.show', ['group' => $group->id]);
 }
 
-public function leave(Group $group)
+public function leave(Request $request, Group $group)
 {
-    $group->admins()->detach(auth()->user());
+    $user = $request->user();
+    
+    $group->users()->detach($user->id);
 
     return redirect()->route('admin.groups.show', $group)->with('success', 'You have successfully left the group');
 }
