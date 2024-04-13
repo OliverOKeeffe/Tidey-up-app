@@ -21,6 +21,19 @@
                         @foreach ($group->cleanups as $cleanup)
                         <p><b>Cleanup Name:</b> {{ $cleanup->name }}</p>
                         @endforeach
+                        <h3>Cleanups associated with this group:</h3>
+                        @if($group->cleanups->isEmpty())
+                        <p>No cleanups associated with this group.</p>
+                        @else
+                        @foreach($group->cleanups as $cleanup)
+                        <p>
+                            <b>Cleanup Location:</b>
+                            <a href="{{ route('admin.cleanups.show', $cleanup->id) }}">
+                                {{ $cleanup->location }}
+                            </a>
+                        </p>
+                        @endforeach
+                        @endif
                         <button type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"><a href="{{ route('admin.groups.edit', $group->id) }}">Edit</a></button>
 
                         <form method="POST" action="{{ route('admin.groups.destroy' , $group->id) }}">
