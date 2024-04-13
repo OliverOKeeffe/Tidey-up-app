@@ -38,8 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::post('/cleanups/{cleanup}/join', [AdminCleanUpController::class, 'join'])->name('admin.cleanups.join');
-    Route::post('/cleanups/{cleanup}/leave', [AdminCleanUpController::class, 'leave'])->name('admin.cleanups.leave');
+    Route::post('/admin/cleanups/{cleanup}/join', [AdminCleanUpController::class, 'join'])->name('admin.cleanups.join');
+    Route::post('/admin/cleanups/{cleanup}/leave', [AdminCleanUpController::class, 'leave'])->name('admin.cleanups.leave');
+    Route::post('/user/cleanups/{cleanup}/join', [UserCleanUpController::class, 'join'])->name('user.cleanups.join');
+    Route::post('/user/cleanups/{cleanup}/leave', [UserCleanUpController::class, 'leave'])->name('user.cleanups.leave');
 
     
 });

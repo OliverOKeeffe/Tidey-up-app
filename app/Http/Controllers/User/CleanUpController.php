@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\CleanUp;
+use App\Models\Group;
+use Illuminate\Support\Facades\Auth;
 
 class CleanUpController extends Controller
 {
@@ -38,7 +39,7 @@ class CleanUpController extends Controller
         $user->cleanUps()->attach($cleanup->id);
     
         // Redirect to the cleanup's show page
-        return redirect()->route('admin.cleanups.show', ['cleanup' => $cleanup->id]);
+        return redirect()->route('user.cleanups.show', ['cleanup' => $cleanup->id]);
     }
     
     
@@ -51,6 +52,6 @@ class CleanUpController extends Controller
         $user->cleanUps()->detach($cleanup->id);
     
         // Redirect to the cleanup's show page
-        return redirect()->route('admin.cleanups.show', ['cleanup' => $cleanup->id]);
+        return redirect()->route('user.cleanups.show', ['cleanup' => $cleanup->id]);
     }
 }
