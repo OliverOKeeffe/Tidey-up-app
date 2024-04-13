@@ -28,4 +28,10 @@ class Group extends Model
 {
     return $this->hasMany(CleanUp::class);
 }
+
+public function users()
+{
+    return $this->belongsToMany(User::class);
+}
+
 }

@@ -43,6 +43,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/cleanups/{cleanup}/join', [UserCleanUpController::class, 'join'])->name('user.cleanups.join');
     Route::post('/user/cleanups/{cleanup}/leave', [UserCleanUpController::class, 'leave'])->name('user.cleanups.leave');
 
+    Route::post('/admin/groups/{group}/join', [AdminGroupController::class, 'join'])->name('admin.groups.join');
+    Route::post('/admin/groups/{group}/leave', [AdminGroupController::class, 'leave'])->name('admin.groups.leave');
+    Route::post('/user/groups/{group}/join', [UserGroupController::class, 'join'])->name('user.groups.join');
+    Route::post('/user/groups/{group}/leave', [UserGroupController::class, 'leave'])->name('user.groups.leave');
+
     
 });
 

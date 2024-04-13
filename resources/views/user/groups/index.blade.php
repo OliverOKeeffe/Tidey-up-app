@@ -41,7 +41,7 @@
                     {{ $group->location }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $group->no_of_users }}
+                    {{ $group->users->count() }}
                 </td>
                 <td class="px-6 py-4">
                     {{ $group->cleanups->count() }}

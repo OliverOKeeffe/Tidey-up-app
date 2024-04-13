@@ -80,4 +80,22 @@ class GroupController extends Controller
 
     return redirect()->route('admin.groups.index')->with('status', 'Group deleted successfully');
 }
+public function join(Group $group)
+{
+    if ($group->admins()->where('admin_id', auth()->id())->exists()) {
+        // User is already a member of the group
+        return redirect()->route('admin.groups.show', $group)->with('error', 'You are already a member of this group');
+    }
+
+    $group->admins()->attach(auth()->user());
+
+    return redirect()->route('admin.groups.show', $group)->with('success', 'You have successfully joined the group');
+}
+
+public function leave(Group $group)
+{
+    $group->admins()->detach(auth()->user());
+
+    return redirect()->route('admin.groups.show', $group)->with('success', 'You have successfully left the group');
+}
 }

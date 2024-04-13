@@ -32,5 +32,22 @@ class GroupController extends Controller
         ]);
     }
 
+    public function join(Group $group)
+    {
+        if ($group->users()->where('user_id', auth()->id())->exists()) {
+            // User is already a member of the group
+            return redirect()->route('user.groups.show', $group)->with('error', 'You are already a member of this group');
+        }
 
+        $group->users()->attach(auth()->user());
+
+        return redirect()->route('user.groups.show', $group)->with('success', 'You have successfully joined the group');
+    }
+
+    public function leave(Group $group)
+    {
+        $group->users()->detach(auth()->user());
+
+        return redirect()->route('user.groups.show', $group)->with('success', 'You have successfully left the group');
+    }
 }
