@@ -37,10 +37,10 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
-        $rules =[
-            'name'=> 'required|string|min:2|max:150',
-            'location'=> 'required|string|min:2|max:150',
-            
+        $rules = [
+            'name' => 'required|string|min:2|max:150',
+            'location' => 'required|string|min:2|max:150',
+
 
         ];
         // display the message if the brand is not a unique name
@@ -50,6 +50,7 @@ class GroupController extends Controller
         $group = new Group();
         $group->fill($request->all());
         $group->no_of_users = 0;
+        $group->no_of_cleanups = 0;
         $group->save();
 
         return redirect()->route('admin.groups.index')->with('status', 'Group created successfully');
@@ -69,9 +70,10 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Group $group)
+    public function edit(string $id)
     {
-        
+        $group = Group::findOrFail($id);
+        return view('admin.groups.edit', ['group' => $group]);
     }
 
     /**
@@ -79,41 +81,51 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, Group $group)
     {
-        //
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
+
+        $rules = [
+            'location' => 'required|string|min:2|max:150',
+            'name' => 'required|string|min:2|max:150',
+        ];
+        $group->fill($request->all());
+        $group->save();
+
+        return redirect()->route('admin.groups.index')->with('status', 'Group updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-{
-    $group = Group::findOrFail($id);
+    {
+        $group = Group::findOrFail($id);
 
-    // Delete the associated clean_ups records
-    $group->cleanUps()->delete();
+        // Delete the associated clean_ups records
+        $group->cleanUps()->delete();
 
-    $group->delete();
+        $group->delete();
 
-    return redirect()->route('admin.groups.index')->with('status', 'Group deleted successfully');
-}
-public function join(Group $group)
-{
- // Get the currently authenticated user
- $user = Auth::user();
+        return redirect()->route('admin.groups.index')->with('status', 'Group deleted successfully');
+    }
+    public function join(Group $group)
+    {
+        // Get the currently authenticated user
+        $user = Auth::user();
 
- // Attach the cleanup to the user
- $user->groups()->attach($group->id);
+        // Attach the cleanup to the user
+        $user->groups()->attach($group->id);
 
- // Redirect to the cleanup's show page
- return redirect()->route('admin.groups.show', ['group' => $group->id]);
-}
+        // Redirect to the cleanup's show page
+        return redirect()->route('admin.groups.show', ['group' => $group->id]);
+    }
 
-public function leave(Request $request, Group $group)
-{
-    $user = $request->user();
-    
-    $group->users()->detach($user->id);
+    public function leave(Request $request, Group $group)
+    {
+        $user = $request->user();
 
-    return redirect()->route('admin.groups.show', $group)->with('success', 'You have successfully left the group');
-}
+        $group->users()->detach($user->id);
+
+        return redirect()->route('admin.groups.show', $group)->with('success', 'You have successfully left the group');
+    }
 }
