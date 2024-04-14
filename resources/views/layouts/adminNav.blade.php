@@ -21,10 +21,6 @@
                     <x-nav-link :href="route('admin.groups.index')" :active="request()->routeIs('admin.groups')">
                         {{ __('Groups') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.groups.my')" :active="request()->routeIs('admin.groups')">
-                        {{ __('My Groups') }}
-                    </x-nav-link>
-
                     
                 </div>
             </div>

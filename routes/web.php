@@ -48,8 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/groups/{group}/join', [UserGroupController::class, 'join'])->name('user.groups.join');
     Route::post('/user/groups/{group}/leave', [UserGroupController::class, 'leave'])->name('user.groups.leave');
 
-    Route::get('/admin/groups/{group}/myGroups', [AdminGroupController::class, 'myGroups'])->name('admin.groups.myGroups');
-
     
 });
 
