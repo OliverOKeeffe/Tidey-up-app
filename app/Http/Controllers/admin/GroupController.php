@@ -128,4 +128,13 @@ class GroupController extends Controller
 
         return redirect()->route('admin.groups.show', $group)->with('success', 'You have successfully left the group');
     }
+
+    public function myGroups()
+
+{
+    $user = auth()->user();
+    $groups = $user->groups; // assuming 'groups' is the name of the relationship method in your User model
+
+    return view('admin.groups.my', ['groups' => $groups]);
+}
 }
