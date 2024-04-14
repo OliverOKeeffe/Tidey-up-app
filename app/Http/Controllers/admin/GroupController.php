@@ -29,7 +29,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.groups.create');
     }
 
     /**
@@ -37,7 +37,22 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
-        //
+        $rules =[
+            'name'=> 'required|string|min:2|max:150',
+            'location'=> 'required|string|min:2|max:150',
+            
+
+        ];
+        // display the message if the brand is not a unique name
+
+        // this requests the rules from above for the validation process
+
+        $group = new Group();
+        $group->fill($request->all());
+        $group->no_of_users = 0;
+        $group->save();
+
+        return redirect()->route('admin.groups.index')->with('status', 'Group created successfully');
     }
 
     /**
@@ -56,7 +71,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        //
+        
     }
 
     /**

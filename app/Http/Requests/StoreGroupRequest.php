@@ -11,7 +11,7 @@ class StoreGroupRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,23 @@ class StoreGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=> 'required|string|min:2|max:150',
+            'location'=> 'required|string|min:2|max:150',
+            
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages(): array
+    {
+        return [
+            'location.required' => 'The location field is required.',
+            'name.required' => 'The name field is required.',
+            // Add more custom messages...
         ];
     }
 }
