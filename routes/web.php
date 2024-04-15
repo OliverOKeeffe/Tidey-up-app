@@ -33,7 +33,7 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-   
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -48,7 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/groups/{group}/join', [UserGroupController::class, 'join'])->name('user.groups.join');
     Route::post('/user/groups/{group}/leave', [UserGroupController::class, 'leave'])->name('user.groups.leave');
 
-    
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home.index');
@@ -59,12 +58,12 @@ Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 //         ->only(['index', 'show']);
 
 Route::resource('/admin/cleanups', AdminCleanUpController::class)
-        ->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':admin'])
-        ->names('admin.cleanups');
-    
+    ->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':admin'])
+    ->names('admin.cleanups');
+
 Route::resource('/user/cleanups', UserCleanUpController::class)
-        ->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':user'])
-        ->names('user.cleanups');
+    ->middleware(['auth', \App\Http\Middleware\RoleMiddleware::class . ':user'])
+    ->names('user.cleanups');
 
 
 // Route::resource('/user/cleanups', UserCleanUpController::class)->middleware(['auth', 'role:user'])->names('user.cleanups');
@@ -78,4 +77,4 @@ Route::resource('/user/groups', UserGroupController::class)
     ->names('user.groups');
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

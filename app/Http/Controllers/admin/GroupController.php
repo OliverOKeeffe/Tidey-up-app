@@ -135,6 +135,6 @@ class GroupController extends Controller
     $user = auth()->user();
     $groups = $user->groups; // assuming 'groups' is the name of the relationship method in your User model
 
-    return view('admin.groups.my', ['groups' => $groups]);
+    return view('admin.groups.mygroups', ['groups' => $groups]);
 }
 }
