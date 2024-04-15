@@ -131,7 +131,7 @@ public function leave(CleanUp $cleanup)
     $user = Auth::user();
 
     // Detach the cleanup from the user
-    $user->cleanUps()->detach($cleanup->id);
+    $cleanup->users()->detach($user->id);
 
     // Redirect to the cleanup's show page
     return redirect()->route('admin.cleanups.show', ['cleanup' => $cleanup->id]);

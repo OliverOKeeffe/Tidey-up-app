@@ -23,8 +23,9 @@ class CleanUpFactory extends Factory
             'time' => $this->faker->time(),
             'date' => $this->faker->date(),
             'description' => $this->faker->realText(150),
-            'group_id' => Group::inRandomOrder()->take(1)->pluck('id')[0]
-
+            'group_id' => Group::inRandomOrder()->take(1)->pluck('id')[0],
+            'latitude' => $this->faker->latitude(),
+            'longitude' => $this->faker->longitude(),
         ];
     }
 }
