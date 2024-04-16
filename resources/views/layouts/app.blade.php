@@ -18,6 +18,8 @@
         
     </head>
     <body class="font-sans antialiased">
+            <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             @include('layouts.navigation')
 
@@ -35,7 +37,6 @@
                 {{ $slot }}
             </main>
         </div>
-        <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
     </body>
 </html>
