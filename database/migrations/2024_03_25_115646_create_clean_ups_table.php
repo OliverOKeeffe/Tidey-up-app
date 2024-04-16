@@ -17,6 +17,9 @@ return new class extends Migration
             $table->time('time');
             $table->date('date');
             $table->text('description');
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
+            
             
             // $table->foreignId('image_id');
             // $table->foreign('image_id')->references('id')->on('images');

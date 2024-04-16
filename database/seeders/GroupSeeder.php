@@ -10,9 +10,8 @@ class GroupSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-        Group::factory()->times(15)->create();
-
-    }
+    public function run()
+{
+    \App\Models\Group::factory()->count(10)->create();
+}
 }

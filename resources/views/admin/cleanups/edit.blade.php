@@ -50,7 +50,7 @@
          <label for="group">Group</label>
           <select name="group_id">
        @foreach($groups as $group)
-         <option {{ old('group_id') == $group->id ? "selected" : "" }} value="{{$group->id}}">{{$group->name}}</option>
+         <option {{ old('group_id') == $group->id ? "selected" : "" }} value="{{$group->id}}">{{$group->location}}</option>
         @endforeach
         </select>
     </div>

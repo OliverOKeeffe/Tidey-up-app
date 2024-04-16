@@ -10,8 +10,8 @@ class CleanUpSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
-        CleanUp::factory()->times(10)->create();
-    }
+    public function run()
+{
+    \App\Models\CleanUp::factory()->count(10)->create();
+}
 }

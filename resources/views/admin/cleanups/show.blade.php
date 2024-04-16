@@ -48,5 +48,23 @@
                         <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"><a href="{{ route('admin.cleanups.index') }}">Back</a></button>
 
                     </div>
+
+                    <div id="mapid" style="height: 360px;"></div>
+                <script>
+                    var latitude = {{ $cleanup->latitude ?? 0 }};
+                    var longitude = {{ $cleanup->longitude ?? 0 }};
+
+                    var map = L.map('mapid').setView([latitude, longitude], 13);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                    }).addTo(map);
+
+                    if (latitude !== 0 && longitude !== 0) {
+                        L.marker([latitude, longitude]).addTo(map)
+                        .bindPopup('Cleanup Location')
+                        .openPopup();
+                    }
+                </script>
                     @endsection
                     
