@@ -42,6 +42,8 @@ class CleanUpController extends Controller
             'date'=> 'required|date',
             'description'=> 'required|string|min:2|max:150',
             'group_id' => 'required',
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
 
         ];
         // display the message if the brand is not a unique name
@@ -90,6 +92,8 @@ class CleanUpController extends Controller
         'time'=> 'required|date_format:H:i',
         'date'=> 'required|date',
         'description'=> 'required|string|min:2|max:150',
+        'latitude' => 'required|numeric|between:-90,90',
+        'longitude' => 'required|numeric|between:-180,180',
     ];
 
     $cleanup = CleanUp::findOrFail($id);

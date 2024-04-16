@@ -54,6 +54,20 @@
         @endforeach
         </select>
     </div>
+    <div>
+        <label for="latitude">Latitude</label>
+        <input type="text" name="latitude" id="latitude" value="{{ $cleanup->latitude }}"/>
+        @if($errors->has('latitude'))
+            <span>{{ $errors->first('latitude') }}</span>
+        @endif
+    </div>
+    <div>
+        <label for="longitude">Longitude</label>
+        <input type="text" name="longitude" id="longitude" value="{{ $cleanup->longitude }}"/>
+        @if($errors->has('longitude'))
+            <span>{{ $errors->first('longitude') }}</span>
+        @endif
+    </div>
 
 
 

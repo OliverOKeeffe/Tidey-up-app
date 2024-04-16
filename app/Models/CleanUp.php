@@ -20,7 +20,8 @@ class CleanUp extends Model
         'date',
         'description',
         'group_id',
-        'image_id'
+        'latitude',
+        'longitude',
     ];
 
     public function group()

@@ -51,7 +51,20 @@
         @endforeach
         </select>
     </div>
-   
+    <div>
+        <label for="latitude">Latitude</label>
+        <input type="text" name="latitude" id="latitude" value="{{ old('latitude') }}"/>
+        @if($errors->has('latitude'))
+            <span>{{ $errors->first('latitude') }}</span>
+        @endif
+    </div>
+    <div>
+        <label for="longitude">Longitude</label>
+        <input type="text" name="longitude" id="longitude" value="{{ old('longitude') }}"/>
+        @if($errors->has('longitude'))
+            <span>{{ $errors->first('longitude') }}</span>
+        @endif
+    </div>
 
     <button type="submit" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Create</button>
     <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"><a href="{{ route('admin.cleanups.index') }}">Back</a></button>
