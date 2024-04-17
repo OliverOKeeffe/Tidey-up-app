@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h3><strong>Create Group</strong></h3>    
+<h3 class="text-2xl font-bold mb-4 text-center">Create Group</h3>
 
 {{-- @if ($errors->any())
     <div class="alert alert-danger">
@@ -12,25 +12,27 @@
         </ul>
     </div>
 @endif --}}
-
-<form enctype="multipart/form-data" action="{{ route('admin.groups.store') }}" method="post">
-    @csrf
-    <div>
-        <label for="">Name</label>
-        <input type="text" name="name" id="name" value="{{  old('name') }}"/>
-        @if($errors->has('name'))
-        <span>{{ $errors->first('name') }}</span>
-        @endif
-    </div>
-    <div>
-        <label for="">Location</label>
-        <input type="text" name="location" id="location" value="{{  old('location') }}"/>
-        @if($errors->has('location'))
-        <span>{{ $errors->first('location') }}</span>
-        @endif
-    </div>
-  
-    <button type="submit" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Create</button>
-    <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"><a href="{{ route('admin.groups.index') }}">Back</a></button>
-</form>
+<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 w-1/2 mx-auto">
+    <form enctype="multipart/form-data" action="{{ route('admin.groups.store') }}" method="post" class="space-y-4">
+        @csrf
+        <div class="flex flex-col">
+            <label for="name" class="mb-2 font-bold text-lg">Name</label>
+            <input type="text" name="name" id="name" value="{{ old('name') }}" class="border-2 rounded-lg p-2"/>
+            @if($errors->has('name'))
+                <span class="text-red-500">{{ $errors->first('name') }}</span>
+            @endif
+        </div>
+        <div class="flex flex-col">
+            <label for="location" class="mb-2 font-bold text-lg">Location</label>
+            <input type="text" name="location" id="location" value="{{ old('location') }}" class="border-2 rounded-lg p-2"/>
+            @if($errors->has('location'))
+                <span class="text-red-500">{{ $errors->first('location') }}</span>
+            @endif
+        </div>
+        <div class="flex justify-between">
+            <button type="submit" class="bg-green-700 text-white font-bold py-2 px-4 rounded">Create</button>
+            <a href="{{ route('admin.groups.index') }}" class="bg-blue-700 text-white font-bold py-2 px-4 rounded">Back</a>
+        </div>
+    </form>
+</div>
 @endsection

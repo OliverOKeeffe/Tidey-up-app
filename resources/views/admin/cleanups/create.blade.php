@@ -1,8 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<h3><strong>Create Clean Up</strong></h3>    
-
+<h3 class="text-2xl font-bold mb-4 text-center">Create Clean Up</h3>
 {{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -12,61 +11,63 @@
         </ul>
     </div>
 @endif --}}
-
-<form enctype="multipart/form-data" action="{{ route('admin.cleanups.store') }}" method="post">
-    @csrf
-    <div>
-        <label for="">Location</label>
-        <input type="text" name="location" id="location" value="{{  old('location') }}"/>
-        @if($errors->has('location'))
-        <span>{{ $errors->first('location') }}</span>
-        @endif
-    </div>
-    <div>
-        <label for="">Time</label>
-        <input type="time" name="time" id="time" value="{{  old('time') }}"/>
-        @if($errors->has('time'))
-        <span>{{ $errors->first('time') }}</span>
-        @endif
-    </div>
-    <div>
-        <label for="">Date</label>
-        <input type="date" name="date" id="date" value="{{  old('date') }}"/>
-        @if($errors->has('date'))
-        <span>{{ $errors->first('date') }}</span>
-        @endif
-    </div>
-    <div>
-        <label for="">Description</label>
-        <input type="text" name="description" id="description" value="{{  old('description') }}"/>
-        @if($errors->has('description'))
-        <span>{{ $errors->first('description') }}</span>
-        @endif
-    </div>
-    <div class="form-group">
-         <label for="group">Group</label>
-          <select name="group_id">
-       @foreach($groups as $group)
-         <option {{ old('group_id') == $group->id ? "selected" : "" }} value="{{$group->id}}">{{$group->name}}</option>
-        @endforeach
-        </select>
-    </div>
-    <div>
-        <label for="latitude">Latitude</label>
-        <input type="text" name="latitude" id="latitude" value="{{ old('latitude') }}"/>
-        @if($errors->has('latitude'))
-            <span>{{ $errors->first('latitude') }}</span>
-        @endif
-    </div>
-    <div>
-        <label for="longitude">Longitude</label>
-        <input type="text" name="longitude" id="longitude" value="{{ old('longitude') }}"/>
-        @if($errors->has('longitude'))
-            <span>{{ $errors->first('longitude') }}</span>
-        @endif
-    </div>
-
-    <button type="submit" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Create</button>
-    <button type="submit" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"><a href="{{ route('admin.cleanups.index') }}">Back</a></button>
-</form>
+<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 w-1/2 mx-auto">
+    <form enctype="multipart/form-data" action="{{ route('admin.cleanups.store') }}" method="post" class="space-y-4">
+        @csrf
+        <div class="flex flex-col">
+            <label for="location" class="mb-2 font-bold text-lg">Location</label>
+            <input type="text" name="location" id="location" value="{{ old('location') }}" class="border-2 rounded-lg p-2"/>
+            @if($errors->has('location'))
+                <span class="text-red-500">{{ $errors->first('location') }}</span>
+            @endif
+        </div>
+        <div class="flex flex-col">
+            <label for="time" class="mb-2 font-bold text-lg">Time</label>
+            <input type="time" name="time" id="time" value="{{ old('time') }}" class="border-2 rounded-lg p-2"/>
+            @if($errors->has('time'))
+                <span class="text-red-500">{{ $errors->first('time') }}</span>
+            @endif
+        </div>
+        <div class="flex flex-col">
+            <label for="date" class="mb-2 font-bold text-lg">Date</label>
+            <input type="date" name="date" id="date" value="{{ old('date') }}" class="border-2 rounded-lg p-2"/>
+            @if($errors->has('date'))
+                <span class="text-red-500">{{ $errors->first('date') }}</span>
+            @endif
+        </div>
+        <div class="flex flex-col">
+            <label for="description" class="mb-2 font-bold text-lg">Description</label>
+            <input type="text" name="description" id="description" value="{{ old('description') }}" class="border-2 rounded-lg p-2"/>
+            @if($errors->has('description'))
+                <span class="text-red-500">{{ $errors->first('description') }}</span>
+            @endif
+        </div>
+        <div class="flex flex-col">
+            <label for="group" class="mb-2 font-bold text-lg">Group</label>
+            <select name="group_id" class="border-2 rounded-lg p-2">
+                @foreach($groups as $group)
+                    <option {{ old('group_id') == $group->id ? "selected" : "" }} value="{{$group->id}}">{{$group->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="flex flex-col">
+            <label for="latitude" class="mb-2 font-bold text-lg">Latitude</label>
+            <input type="text" name="latitude" id="latitude" value="{{ old('latitude') }}" class="border-2 rounded-lg p-2"/>
+            @if($errors->has('latitude'))
+                <span class="text-red-500">{{ $errors->first('latitude') }}</span>
+            @endif
+        </div>
+        <div class="flex flex-col">
+            <label for="longitude" class="mb-2 font-bold text-lg">Longitude</label>
+            <input type="text" name="longitude" id="longitude" value="{{ old('longitude') }}" class="border-2 rounded-lg p-2"/>
+            @if($errors->has('longitude'))
+                <span class="text-red-500">{{ $errors->first('longitude') }}</span>
+            @endif
+        </div>
+        <div class="flex justify-between">
+            <button type="submit" class="bg-green-700 text-white font-bold py-2 px-4 rounded">Create</button>
+            <a href="{{ route('admin.cleanups.index') }}" class="bg-blue-700 text-white font-bold py-2 px-4 rounded">Back</a>
+        </div>
+    </form>
+</div>
 @endsection
