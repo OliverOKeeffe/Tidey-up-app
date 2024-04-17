@@ -20,7 +20,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-blue-500 dark:bg-gray-900">
+    <div class="min-h-screen bg-blue-300 dark:bg-gray-900">
         @include('layouts.adminNav')
 
         <!-- Page Heading -->

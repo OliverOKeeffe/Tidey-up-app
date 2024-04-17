@@ -20,7 +20,7 @@
     <body class="font-sans antialiased">
             <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-        <div class="min-h-screen bg-blue-500">
+        <div class="min-h-screen bg-blue-300">
             @include('layouts.navigation')
 
             <!-- Page Heading -->

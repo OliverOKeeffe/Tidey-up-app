@@ -1,38 +1,35 @@
 @extends('layouts.admin')
 
 @section('content')
-<h3>Edit Clean Up</h3>
-
-{{-- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-@endforeach
-</ul>
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
+                <h3 class="text-2xl font-bold mb-4 text-center">Edit Clean Up</h3>
+                <form action="{{ route('admin.groups.update', $group->id ) }}" method="post" class="space-y-4">
+                    @csrf
+                    @method('PUT')
+                    <div>
+                        <label for="name" class="font-bold text-lg">Name</label>
+                        <input type="text" name="name" id="name" value="{{ old('name')? : $group->name }}" class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" />
+                        @if($errors->has('name'))
+                        <span class="text-red-500 text-sm">{{ $errors->first('name') }}</span>
+                        @endif
+                    </div>
+                    <div>
+                        <label for="location" class="font-bold text-lg">Location</label>
+                        <input type="text" name="location" id="location" value="{{ old('location')? : $group->location }}" class="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0" />
+                        @if($errors->has('location'))
+                        <span class="text-red-500 text-sm">{{ $errors->first('location') }}</span>
+                        @endif
+                    </div>
+                    <div class="flex justify-between">
+                        <button type="submit" class="bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
+                        <a href="{{ url()->previous() }}" class="bg-gray-500 text-white font-bold py-2 px-4 rounded">Back</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
-@endif --}}
-
-<form action="{{ route('admin.groups.update', $group->id ) }}" method="post">
-    @csrf
-    @method('PUT')
-    <div>
-        <label for="">name</label>
-        <input type="text" name="name" id="name" value="{{ old('name')? : $group->name }}" />
-        @if($errors->has('name'))
-        <span>{{ $errors->first('name') }}</span>
-        @endif
-    </div>
-    <div>
-        <label for="">location</label>
-        <input type="text" name="location" id="location" value="{{ old('location')? : $group->location }}" />
-        @if($errors->has('location'))
-        <span>{{ $errors->first('location') }}</span>
-        @endif
-    </div>
-   
-    <button type="submit" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">Save Clean Up</button>
-    <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"><a href="{{ route('admin.groups.index') }}">Back</a></button>
-
-</form>
 @endsection
