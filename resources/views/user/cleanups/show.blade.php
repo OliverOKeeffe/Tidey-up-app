@@ -28,7 +28,7 @@
 
                     <div class="mb-4">
                         <h3 class="text-lg font-semibold">Actions</h3>
-                        <div class="flex space-x-4">
+                        <div class="flex justify-between space-x-4">
                             <form method="POST"
                                 action="{{ auth()->user()->cleanUps->contains($cleanup->id)? route('user.cleanups.leave', $cleanup->id): route('user.cleanups.join', $cleanup->id) }}"
                                 onsubmit="console.log('Form submitted')">

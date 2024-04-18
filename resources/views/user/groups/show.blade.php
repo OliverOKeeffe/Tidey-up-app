@@ -41,22 +41,27 @@
 
                         <div class="mb-4">
                             <h3 class="text-lg font-semibold">Actions</h3>
-                            <div class="flex space-x-4">
-                                @if ($group->users()->where('user_id', auth()->id())->exists())
-                                <form method="POST" action="{{ route('user.groups.leave', $group) }}">
+                            <div class="flex justify-between space-x-4">
+                                <form method="POST"
+                                    action="{{ auth()->user()->groups->contains($group->id)? route('user.groups.leave', $group->id): route('user.groups.join', $group->id) }}"
+                                    onsubmit="console.log('Form submitted')">
                                     @csrf
-                                    <button type="submit" class="text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Leave Group</button>
+                                    <button type="submit"
+                                        class="{{ auth()->user()->groups->contains($group->id)? 'btn btn-warning': 'btn btn-success' }}"
+                                        style="background-color: {{ auth()->user()->groups->contains($group->id)? '#ff0000': '#28a745' }}; color: white; padding: 10px 20px; border-radius: 5px;">
+                                        {!! auth()->user()->groups->contains($group->id)
+                                            ? 'Leave &#x1F44E;'
+                                            : 'Join &#x1F44D;' !!}
+                                    </button>
                                 </form>
-                                @else
-                                <form method="POST" action="{{ route('user.groups.join', $group) }}">
-                                    @csrf
-                                    <button type="submit" class="text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Join Group</button>
-                                </form>
-                                @endif
+                        
+                                <a href="{{ url()->previous() }}" class="btn btn-secondary"
+                                    style="background-color: #6c757d; color: white; padding: 10px 20px; border-radius: 5px;">
+                                    &#8617; Back
+                                </a>
                             </div>
                         </div>
-
-                        <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"><a href="{{ route('user.groups.index') }}">Back</a></button>
+                    </div>
                     </div>
                 </div>
             </div>
