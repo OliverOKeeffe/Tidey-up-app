@@ -7,53 +7,67 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <div class="text-gray-900 dark:text-gray-100">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold">Details</h3>
+                        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                            <div class="px-4 py-5 sm:px-6">
+                                <p><b>Location:</b> {{ $cleanup->location }}</p>
+                                <p><b>Time:</b> {{ $cleanup->time }}</p>
+                                <p><b>Date:</b> {{ $cleanup->date }}</p>
+                                <p><b>Description:</b> {{ $cleanup->description }}</p>
+                                <p><b>Group Id:</b> {{ $cleanup->group_id }}</p>
+                                @if ($cleanup->group)
+                                    <p><b>Group Name:</b> {{ $cleanup->group->name }}</p>
+                                @endif
+                                <p>{{ $cleanup->users->count() }} users have joined this cleanup.</p>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold">Actions</h3>
+                        <div class="flex space-x-4">
+                            <form method="POST"
+                                action="{{ auth()->user()->cleanUps->contains($cleanup->id)? route('user.cleanups.leave', $cleanup->id): route('user.cleanups.join', $cleanup->id) }}"
+                                onsubmit="console.log('Form submitted')">
+                                @csrf
+                                <button type="submit"
+                                    class="{{ auth()->user()->cleanUps->contains($cleanup->id)? 'btn btn-warning': 'btn btn-success' }}"
+                                    style="background-color: {{ auth()->user()->cleanUps->contains($cleanup->id)? '#ff0000': '#28a745' }}; color: white; padding: 10px 20px; border-radius: 5px;">
+                                    {!! auth()->user()->cleanUps->contains($cleanup->id)
+                                        ? 'Leave &#x1F44E;'
+                                        : 'Join &#x1F44D;' !!}
+                                </button>
+                            </form>
 
-                        <p><b>Location:</b> {{ $cleanup->location }}</p>
-                        <p><b>Time:</b> {{ $cleanup->time }}</p>
-                        <p><b>Date:</b> {{ $cleanup->date }}</p>
-                        <p><b>Description:</b> {{ $cleanup->description }}</p>
-                        <p><b>Group Id:</b> {{ $cleanup->group_id }}</p>
-                        <p><b>Group Name:</b> {{ $cleanup->group->name }}</p>
-                        <p>{{ $cleanup->users->count() }} users have joined this cleanup.</p>
-                        @unless(auth()->user()->cleanUps->contains($cleanup->id))
-                        <form method="POST" action="{{ route('user.cleanups.join', $cleanup->id) }}" onsubmit="console.log('Form submitted')">
-                            @csrf
-                            <button type="submit" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900">Join</button>
-                        </form>
-                        @endunless
-                        @if(auth()->user()->cleanUps->contains($cleanup->id))
-                        <form method="POST" action="{{ route('user.cleanups.leave', $cleanup->id) }}">
-                            @csrf
-                            <button type="submit" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Leave</button>
-                        </form>
-                        @endif
-                        <a href="{{ url()->previous() }}" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Back</a>
-                        
-                        <div id="mapid" style="height: 360px;"></div>
-                        <script>
-                            var latitude = {{ $cleanup->latitude ?? 0 }};
-                            var longitude = {{ $cleanup->longitude ?? 0 }};
+                            <a href="{{ url()->previous() }}" class="btn btn-secondary"
+                                style="background-color: #6c757d; color: white; padding: 10px 20px; border-radius: 5px;">
+                                &#8617; Back
+                            </a>
+                        </div>
+                    </div>
 
-                            var map = L.map('mapid').setView([latitude, longitude], 13);
+                    <div id="mapid" style="height: 360px;"></div>
+                    <script>
+                        var latitude = {{ $cleanup->latitude ?? 0 }};
+                        var longitude = {{ $cleanup->longitude ?? 0 }};
 
-                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                maxZoom: 19,
-                            }).addTo(map);
+                        var map = L.map('mapid').setView([latitude, longitude], 13);
 
-                            if (latitude !== 0 && longitude !== 0) {
-                                L.marker([latitude, longitude]).addTo(map)
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 19,
+                        }).addTo(map);
+
+                        if (latitude !== 0 && longitude !== 0) {
+                            L.marker([latitude, longitude]).addTo(map)
                                 .bindPopup('Cleanup Location')
                                 .openPopup();
-                            }
-                        </script>
-                    </div>
+                        }
+                    </script>
                 </div>
             </div>
         </div>
     </div>
-
 </x-app-layout>
