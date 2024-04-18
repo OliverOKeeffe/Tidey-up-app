@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-<h3 class="text-2xl font-bold mb-4 text-center">Create Clean Up</h3>
 {{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -12,6 +11,7 @@
     </div>
 @endif --}}
 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 w-1/2 mx-auto">
+    <h3 class="text-2xl font-bold mb-4 text-center">Create Clean Up</h3>
     <form enctype="multipart/form-data" action="{{ route('admin.cleanups.store') }}" method="post" class="space-y-4">
         @csrf
         <div class="flex flex-col">
