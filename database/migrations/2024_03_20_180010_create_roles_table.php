@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Create a new table named 'roles' in the database
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -24,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Drop the 'roles' table from the database
         Schema::dropIfExists('roles');
     }
 };

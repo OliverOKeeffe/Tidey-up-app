@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Call the specified seeders to seed data into the database
         $this->call([
                 RoleSeeder::class,
                 UserSeeder::class,

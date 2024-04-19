@@ -19,13 +19,9 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
-            
-            
-            // $table->foreignId('image_id');
-            // $table->foreign('image_id')->references('id')->on('images');
 
-            $table->foreignId('group_id');
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreignId('group_id'); // Add a 'group_id' column (foreign key)
+            $table->foreign('group_id')->references('id')->on('groups'); // Define foreign key constraint for 'group_id'
             
             $table->timestamps();
         });

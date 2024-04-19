@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //setting a default value for the no_of_cleanups column in the groups table
         Schema::table('groups', function (Blueprint $table) {
             $table->integer('no_of_users')->default(0)->change();
         });

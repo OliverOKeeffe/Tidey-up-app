@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+//Import the calsses
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCleanUpRequest;
 use App\Http\Requests\UpdateCleanUpRequest;
@@ -16,7 +17,9 @@ class CleanUpController extends Controller
      */
     public function index()
     {
+        //retrieve all the cleanups
         $cleanups = CleanUp::all();
+        //return the view with the cleanups
         return view('admin.cleanups.index')->with('cleanups', $cleanups);
     }
 
@@ -36,6 +39,7 @@ class CleanUpController extends Controller
      */
     public function store(StoreCleanUpRequest $request)
     {
+        //sets the rules that must be followed for the clean up to be created
         $rules =[
             'location'=> 'required|string|min:2|max:150',
             'time'=> 'required|time',
@@ -46,12 +50,12 @@ class CleanUpController extends Controller
             'longitude' => 'required|numeric|between:-180,180',
 
         ];
-        // display the message if the brand is not a unique name
 
-        // this requests the rules from above for the validation process
-
+        //creates a new clean up
         $cleanUp = new CleanUp();
+        //fills the clean up with the request data
         $cleanUp->fill($request->all());
+        //saves the clean up
         $cleanUp->save();
 
         return redirect()->route('admin.cleanups.index')->with('status', 'Clean-Up created successfully');

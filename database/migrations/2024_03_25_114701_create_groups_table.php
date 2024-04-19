@@ -11,24 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Create a new table named 'groups' in the database
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('location');
             $table->integer('no_of_users');
             $table->integer('no_of_cleanups');
-
-            // $table->foreignId('user_id');
-
-            // $table->foreign('user_id')->references('id')->on('users');
-
-            // $table->foreignId('clean-up_id');
-
-            // $table->foreign('clean-up_id')->references('id')->on('clean-ups');
-
-            // $table->foreignId('image_id');
-
-            // $table->foreign('image_id')->references('id')->on('images');
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ class CleanUp extends Model
      *
      * @var array<int, string>
      */
+    // Define the attributes that can be mass assigned
     protected $fillable = [
         'location',
         'time',
@@ -24,6 +25,8 @@ class CleanUp extends Model
         'longitude',
     ];
 
+    // Define the relationship between a cleanup and a group
+    // A cleanup belongs to one group
     public function group()
     {
         return $this->belongsTo(Group::class);

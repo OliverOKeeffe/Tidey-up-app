@@ -14,6 +14,7 @@ class Group extends Model
      *
      * @var array<int, string>
      */
+    
     protected $fillable = [
         'name',
         'location',
@@ -23,7 +24,8 @@ class Group extends Model
         'clan-up_id',
         'image_id',
     ];
-
+    // Define the relationship between a group and cleanups
+    // A group can have many cleanups
     public function cleanups()
 {
     return $this->hasMany(CleanUp::class);

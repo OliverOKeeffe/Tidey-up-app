@@ -12,6 +12,7 @@ class GroupSeeder extends Seeder
      */
     public function run()
 {
+    // Define an array of groups to seed into the database
     $groups = [
         [
             'name' => 'Group 1',
@@ -57,7 +58,7 @@ class GroupSeeder extends Seeder
         ],
     ];
 
-
+    // Loop through the groups array and create a new group for each item
     foreach ($groups as $group) {
         Group::create($group);
     }

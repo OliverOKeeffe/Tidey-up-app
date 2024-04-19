@@ -17,8 +17,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        // $groups = Group::all();
-        // return view('admin.groups.index')->with('groups', $groups);
+    
         $groups = Group::with('cleanups')->get();
 
         return view('admin.groups.index', ['groups' => $groups]);
@@ -43,9 +42,6 @@ class GroupController extends Controller
 
 
         ];
-        // display the message if the brand is not a unique name
-
-        // this requests the rules from above for the validation process
 
         $group = new Group();
         $group->fill($request->all());
@@ -122,10 +118,13 @@ class GroupController extends Controller
 
     public function leave(Request $request, Group $group)
     {
+        // Get the currently authenticated user
         $user = $request->user();
 
+        // Detach the cleanup from the user
         $group->users()->detach($user->id);
 
+        // Redirect to the cleanup's show page
         return redirect()->route('admin.groups.show', $group)->with('success', 'You have successfully left the group');
     }
 

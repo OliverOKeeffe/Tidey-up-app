@@ -43,7 +43,7 @@
                 <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                     <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                         <header class="flex justify-between items-center py-10">
-                            <img class="logo" src="{{ asset('logo/beach-svgrepo-com.svg') }}" alt="Logo" style="width: 128px; height: 128px;">
+                            <img class="logo" src="{{ asset('logo/beach-svgrepo-com.svg') }}" alt="Logo" style="width: 128px; height: 128px;"> 
                         </div>
                         @if (Route::has('login'))
                             <nav class="mt-8">

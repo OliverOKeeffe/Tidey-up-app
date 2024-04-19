@@ -12,6 +12,7 @@ class CleanUpSeeder extends Seeder
      */
     public function run()
 {
+    // Define an array of cleanups to seed into the database
     $cleanups = [
         [
             'location' => 'Killiney Beach, Dublin',
@@ -105,6 +106,7 @@ class CleanUpSeeder extends Seeder
         ]
 
     ];
+    // Loop through each cleanup in the cleanups array and create a new cleanup in the database
     foreach ($cleanups as $cleanup) {
         Cleanup::create($cleanup);
     }
