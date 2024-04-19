@@ -31,8 +31,9 @@
                             @foreach($group->cleanups as $cleanup)
                             <p>
                                 <b>Cleanup Location:</b>
-                                <a href="{{ route('user.cleanups.show', $cleanup->id) }}">
-                                    {{ $cleanup->location }}
+                                <a href="{{ route('user.cleanups.show', $cleanup->id) }}"
+                                    class="text-blue-500 hover:underline">
+                                    <span class="font-normal">{{ $cleanup->location }}</span>
                                 </a>
                             </p>
                             @endforeach

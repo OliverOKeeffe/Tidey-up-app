@@ -21,7 +21,7 @@
                                 <p><b>Description:</b> {{ $cleanup->description }}</p>
                                 <p><b>Group Id:</b> {{ $cleanup->group_id }}</p>
                                 @if ($cleanup->group)
-                                    <p><b>Group Name:</b> {{ $cleanup->group->name }}</p>
+                                    <p><b>Group Location:</b> {{ $cleanup->group->location }}</p>
                                 @endif
                                 <p>{{ $cleanup->users->count() }} users have joined this cleanup.</p>
                             </div>

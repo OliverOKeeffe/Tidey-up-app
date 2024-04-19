@@ -15,64 +15,46 @@ class GroupSeeder extends Seeder
     $groups = [
         [
             'name' => 'Group 1',
-            'location' => 'New York',
+            'location' => 'Dublin',
             'no_of_users' => 20,
             'no_of_cleanups' => 10,
         ],
         [
             'name' => 'Group 2',
-            'location' => 'Los Angeles',
+            'location' => 'Achill',
             'no_of_users' => 30,
             'no_of_cleanups' => 15,
         ],
         [
             'name' => 'Group 3',
-            'location' => 'Chicago',
+            'location' => 'Donegal',
             'no_of_users' => 25,
             'no_of_cleanups' => 12,
         ],
         [
             'name' => 'Group 4',
-            'location' => 'Houston',
+            'location' => 'Wicklow',
             'no_of_users' => 35,
             'no_of_cleanups' => 18,
         ],
         [
             'name' => 'Group 5',
-            'location' => 'Phoenix',
+            'location' => 'Clare',
             'no_of_users' => 40,
             'no_of_cleanups' => 20,
         ],
         [
             'name' => 'Group 6',
-            'location' => 'Philadelphia',
+            'location' => 'Sligo',
             'no_of_users' => 45,
             'no_of_cleanups' => 22,
         ],
         [
             'name' => 'Group 7',
-            'location' => 'San Antonio',
+            'location' => 'Mayo',
             'no_of_users' => 50,
             'no_of_cleanups' => 25,
         ],
-        [
-            'name' => 'Group 8',
-            'location' => 'San Diego',
-            'no_of_users' => 55,
-            'no_of_cleanups' => 28,
-        ],
-        [
-            'name' => 'Group 9',
-            'location' => 'Dallas',
-            'no_of_users' => 60,
-            'no_of_cleanups' => 30,
-        ],
-        [
-            'name' => 'Group 10',
-            'location' => 'San Jose',
-            'no_of_users' => 65,
-            'no_of_cleanups' => 32,
-        ]
     ];
 
 
