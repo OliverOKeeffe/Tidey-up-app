@@ -42,7 +42,8 @@
             <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                 <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                     <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                        <header class="flex justify-between items-center py-10">
+                        <header class="flex flex-col justify-between items-center py-10">
+                            <h1 style="font-size: 3em; font-weight: bold; padding-bottom: 20px">Tidey Up</h1> 
                             <img class="logo" src="{{ asset('logo/beach-svgrepo-com.svg') }}" alt="Logo" style="width: 128px; height: 128px;"> 
                         </div>
                         @if (Route::has('login'))
