@@ -1,24 +1,23 @@
 @extends('layouts.admin')
 
 @section('header')
-    <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Groups') }}
         </h2>
-    </x-slot>
 @endsection
 
+
 @section('content')
-    <div class="py-12">
+    <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <div class="text-gray-900 dark:text-gray-100">
                     <div class="mb-4">
-                        <h3 class="text-lg font-semibold">Details</h3>
+                        <h3 class="text-lg font-semibold">Group Details</h3>
                         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
                             <div class="px-4 py-5 sm:px-6">
+                                <p><b>Name:</b> {{ $group->name}}</p>
                                 <p><b>Location:</b> {{ $group->location }}</p>
-                                <p><b>Description:</b> {{ $group->description }}</p>
                                 <p><b>Number of Users:</b> {{ $group->users->count() }}</p>
                                 <p><b>Number of Clean Ups:</b> {{ $group->cleanups->count() }}</p>
                             </div>
